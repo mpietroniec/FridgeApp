@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addition"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".addition.AddingActivity">
+
+    <EditText
+        android:id="@+id/add_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:autofillHints="Product name"
+        android:drawableStart="@drawable/ic_playlist_add"
+        android:hint="Product name"
+        android:inputType="text"
+        android:textStyle="bold|italic" />
+
+    <EditText
+        android:id="@+id/add_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_name"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:autofillHints="Amount"
+        android:drawableStart="@drawable/ic_north_east"
+        android:hint="Amount"
+        android:inputType="number"
+        android:textStyle="bold|italic" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_amount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp">
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/add_next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/add_button"
+            android:text="Next product"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/add_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/add_next_btn"
+            android:text="Back"
+            android:textColor="#FFFFFF" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
