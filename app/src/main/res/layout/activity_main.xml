@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_add"
-        android:text="Add products"
+        android:text="@string/add_products"
         android:textSize="30sp" />
 
     <Button
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_list"
-        android:text="Shopping list"
+        android:text="@string/shopping_list"
         android:textSize="30sp" />
 
     <Button
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_search"
-        android:text="View products"
+        android:text="@string/view_products"
         android:textSize="30sp" />
 
 </LinearLayout>
