@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.project.fridgeapp.addition.AddingActivity;
+import com.project.fridgeapp.reviewProducts.ReviewActivity;
 import com.project.fridgeapp.shoppingList.ShoppingList;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ShoppingList.class);
+                startActivity(intent);
+            }
+        });
+
+        viewProductsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ReviewActivity.class);
                 startActivity(intent);
             }
         });

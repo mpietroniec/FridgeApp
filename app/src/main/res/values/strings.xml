@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">FridgeApp</string>
+    <string name="add_products">Add products</string>
+    <string name="shopping_list">Shopping list</string>
+    <string name="view_products">View products</string>
+    <string name="back">Back</string>
+    <string name="next_product">Next product</string>
+    <string name="add">Add</string>
+    <string name="amount">Amount</string>
+    <string name="product_name">Product name</string>
 </resources>
