@@ -7,9 +7,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.project.fridgeapp.dao.FridgeProductDao;
+import com.project.fridgeapp.dao.ShoppingListItemDao;
 import com.project.fridgeapp.entities.FridgeProduct;
+import com.project.fridgeapp.entities.ShoppingListItem;
 
-@Database(entities = {FridgeProduct.class}, version = 1, exportSchema = false)
+@Database(entities = {FridgeProduct.class, ShoppingListItem.class}, version = 2, exportSchema = false)
 public abstract class DatabaseHelper extends RoomDatabase {
     //Database instance
     private static DatabaseHelper database;
@@ -26,4 +28,6 @@ public abstract class DatabaseHelper extends RoomDatabase {
     }
 
     public abstract FridgeProductDao fridgeProductDao();
+    public abstract ShoppingListItemDao shoppingListItemDao();
+
 }
