@@ -32,4 +32,12 @@
         android:text="@string/view_products"
         android:textSize="30sp" />
 
+    <Button
+        android:id="@+id/btn_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_image"
+        android:text="fridge image"
+        android:textSize="30sp" />
+
 </LinearLayout>
