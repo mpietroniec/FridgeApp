@@ -1,14 +1,19 @@
 package com.project.fridgeapp.reviewProducts;
 
 import android.content.Context;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.project.fridgeapp.ItemClickListener;
 import com.project.fridgeapp.R;
 import com.project.fridgeapp.database.DatabaseHelper;
 import com.project.fridgeapp.entities.FridgeProduct;
@@ -20,10 +25,12 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
     private List<FridgeProduct> fridgeProductsList;
     private Context context;
     private DatabaseHelper database;
+    private ItemClickListener mItemClickListener;
 
-    public ReviewAdapter(List<FridgeProduct> fridgeProductsList, Context context) {
+    public ReviewAdapter(List<FridgeProduct> fridgeProductsList, Context context, ItemClickListener itemClickListener) {
         this.fridgeProductsList = fridgeProductsList;
         this.context = context;
+        this.mItemClickListener = itemClickListener;
         notifyDataSetChanged();
     }
 
@@ -37,7 +44,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
     public FridgeProductsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_review_row, parent, false);
-        return new FridgeProductsViewHolder(view);
+        return new FridgeProductsViewHolder(view, mItemClickListener);
     }
 
     @Override
@@ -48,6 +55,15 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
         holder.txtProductID.setText(String.valueOf(position + 1));
         holder.txtName.setText(fridgeProduct.getFridgeProductName());
         holder.txtAmount.setText(String.valueOf(fridgeProduct.getFridgeProductAmount()));
+        holder.cardViewReview.setOnClickListener(view -> {
+            if (holder.expandableLinearLayout.getVisibility() == View.GONE) {
+                TransitionManager.beginDelayedTransition(holder.cardViewReview, new AutoTransition());
+                holder.expandableLinearLayout.setVisibility(View.VISIBLE);
+            } else {
+                TransitionManager.beginDelayedTransition(holder.cardViewReview, new AutoTransition());
+                holder.expandableLinearLayout.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -55,14 +71,26 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
         return fridgeProductsList.size();
     }
 
-    public class FridgeProductsViewHolder extends RecyclerView.ViewHolder {
+    public class FridgeProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView txtName, txtAmount, txtProductID;
+        LinearLayout expandableLinearLayout;
+        CardView cardViewReview;
+        ItemClickListener itemClickListener;
 
-        public FridgeProductsViewHolder(@NonNull View itemView) {
+        public FridgeProductsViewHolder(@NonNull View itemView, ItemClickListener itemClickListener) {
             super(itemView);
             txtProductID = itemView.findViewById(R.id.txt_product_id);
             txtName = itemView.findViewById(R.id.txt_product_name);
             txtAmount = itemView.findViewById(R.id.txt_product_amount);
+            expandableLinearLayout = itemView.findViewById(R.id.ll_fridge_product_edit);
+            cardViewReview = itemView.findViewById(R.id.cv_review);
+            this.itemClickListener = itemClickListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemClickListener.onItemClickListener(getAdapterPosition());
         }
     }
 }

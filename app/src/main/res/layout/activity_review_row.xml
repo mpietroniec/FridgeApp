@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/reviewLayout"
+    android:id="@+id/cv_review"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_row="0"
@@ -10,41 +10,88 @@
     android:layout_marginBottom="1dp"
     android:elevation="8dp">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/rl_review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="12dp">
 
-        <TextView
-            android:id="@+id/txt_product_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1."
-            android:textColor="#253AB8"
-            android:textSize="40sp"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/txt_product_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16sp"
-            android:layout_toEndOf="@+id/txt_product_id"
-            android:text="Title"
-            android:textColor="@color/design_default_color_primary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txt_product_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID"
+                android:textColor="#253AB8"
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txt_product_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_product_name"
-            android:layout_marginStart="16sp"
-            android:layout_marginTop="8sp"
-            android:layout_toEndOf="@id/txt_product_id"
-            android:text="@string/amount"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/txt_product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16sp"
+                    android:layout_toEndOf="@+id/txt_product_id"
+                    android:text="@string/product_name"
+                    android:textColor="@color/design_default_color_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_product_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txt_product_name"
+                    android:layout_marginStart="16sp"
+                    android:layout_marginTop="8sp"
+                    android:layout_toEndOf="@id/txt_product_id"
+                    android:text="@string/amount" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_fridge_product_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_edit"
+                android:focusable="true"
+                android:text="Edit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="|" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_delete"
+                android:focusable="true"
+                android:text="Delete" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

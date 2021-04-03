@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FridgeApp">
-        <activity android:name=".reviewProducts.ReviewActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".update.UpdateFridgeProductActivity"></activity>
+        <activity
+            android:name=".reviewProducts.ReviewActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".shoppingList.AddToShoppingList"
             android:parentActivityName=".shoppingList.ShoppingList" />
