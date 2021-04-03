@@ -50,6 +50,11 @@ public class AddToShoppingList extends AppCompatActivity {
                     shoppingListItem.setShoppingListItemAmount(dbShoppingListItemAmount);
                     shoppingListItem.setShoppingListItemShopName(sShoppingListItemShopName);
                     databaseHelper.shoppingListItemDao().insert(shoppingListItem);
+
+                    etxtShopListItemName.setText("");
+                    etxtShopListItemAmount.setText("");
+                    etxtShopListItemShopName.setText("");
+
                     shoppingListItemsList.clear();
                     shoppingListItemsList.addAll(databaseHelper.shoppingListItemDao().getAllShoppingListItems());
                 }

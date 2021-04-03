@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.project.fridgeapp.ItemClickListener;
 import com.project.fridgeapp.R;
 import com.project.fridgeapp.database.DatabaseHelper;
 import com.project.fridgeapp.entities.ShoppingListItem;
@@ -16,7 +17,7 @@ import com.project.fridgeapp.entities.ShoppingListItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingList extends AppCompatActivity {
+public class ShoppingList extends AppCompatActivity implements ItemClickListener {
 
     private FloatingActionButton btnAddToShoppingList;
     private RecyclerView recyclerView;
@@ -40,7 +41,7 @@ public class ShoppingList extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new ShoppingListAdapter(dataList, ShoppingList.this);
+        adapter = new ShoppingListAdapter(dataList, ShoppingList.this, this);
         recyclerView.setAdapter(adapter);
 
         btnAddToShoppingList = findViewById(R.id.fbtn_open_shopping_list);
@@ -51,5 +52,10 @@ public class ShoppingList extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onItemClickListener(int position) {
+
     }
 }
