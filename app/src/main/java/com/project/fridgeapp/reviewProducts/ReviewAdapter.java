@@ -1,6 +1,8 @@
 package com.project.fridgeapp.reviewProducts;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import com.project.fridgeapp.ItemClickListener;
 import com.project.fridgeapp.R;
 import com.project.fridgeapp.database.DatabaseHelper;
 import com.project.fridgeapp.entities.FridgeProduct;
+import com.project.fridgeapp.update.UpdateFridgeProductActivity;
 
 import java.util.List;
 
@@ -64,6 +67,29 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
                 holder.expandableLinearLayout.setVisibility(View.GONE);
             }
         });
+
+        holder.txtBtnEditFridgeProduct.setOnClickListener(view -> {
+            Intent intent = new Intent(context, UpdateFridgeProductActivity.class);
+            intent.putExtra("Fridge Product", fridgeProductsList.get(position));
+            context.startActivity(intent);
+        });
+
+        holder.txtBtnDeleteFridgeProduct.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(view.getRootView().getContext());
+            builder.setTitle("Delete?")
+                    .setMessage("Are you sure you want to delete?")
+                    .setPositiveButton("yes", (dialog, which) -> {
+                        FridgeProduct item = fridgeProductsList.get(holder.getAdapterPosition());
+                        database.fridgeProductDao().delete(item);
+                        int pos = holder.getAdapterPosition();
+                        fridgeProductsList.remove(pos);
+                        notifyItemRemoved(pos);
+                        notifyItemRangeChanged(pos, fridgeProductsList.size());
+                    }).setNegativeButton("no", (dialog, which) -> {
+                dialog.cancel();
+            });
+            builder.show();
+        });
     }
 
     @Override
@@ -72,7 +98,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
     }
 
     public class FridgeProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView txtName, txtAmount, txtProductID;
+        private TextView txtName, txtAmount, txtProductID, txtBtnEditFridgeProduct, txtBtnDeleteFridgeProduct;
         LinearLayout expandableLinearLayout;
         CardView cardViewReview;
         ItemClickListener itemClickListener;
@@ -82,6 +108,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
             txtProductID = itemView.findViewById(R.id.txt_product_id);
             txtName = itemView.findViewById(R.id.txt_product_name);
             txtAmount = itemView.findViewById(R.id.txt_product_amount);
+            txtBtnEditFridgeProduct = itemView.findViewById(R.id.txt_btn_fridge_product_edit);
+            txtBtnDeleteFridgeProduct = itemView.findViewById(R.id.txt_btn_fridge_product_delete);
             expandableLinearLayout = itemView.findViewById(R.id.ll_fridge_product_edit);
             cardViewReview = itemView.findViewById(R.id.cv_review);
             this.itemClickListener = itemClickListener;

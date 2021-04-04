@@ -68,12 +68,13 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/txt_btn_fridge_product_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:drawableStart="@drawable/ic_edit"
                 android:focusable="true"
-                android:text="Edit" />
+                android:text="Details" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,6 +84,7 @@
                 android:text="|" />
 
             <TextView
+                android:id="@+id/txt_btn_fridge_product_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"

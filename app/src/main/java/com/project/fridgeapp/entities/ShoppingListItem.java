@@ -8,7 +8,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "shopping_list_item")
-public class ShoppingListItem {
+public class ShoppingListItem implements Parcelable{
     @PrimaryKey(autoGenerate = true)
     private long shoppingListItemID;
     @ColumnInfo(name = "shopping_list_item_name")
@@ -17,6 +17,28 @@ public class ShoppingListItem {
     private int shoppingListItemAmount;
     @ColumnInfo(name = "shopping_list_item_shop_name")
     private String shoppingListItemShopName;
+
+    public ShoppingListItem() {
+    }
+
+    protected ShoppingListItem(Parcel in) {
+        shoppingListItemID = in.readLong();
+        shoppingListItemName = in.readString();
+        shoppingListItemAmount = in.readInt();
+        shoppingListItemShopName = in.readString();
+    }
+
+    public static final Creator<ShoppingListItem> CREATOR = new Creator<ShoppingListItem>() {
+        @Override
+        public ShoppingListItem createFromParcel(Parcel in) {
+            return new ShoppingListItem(in);
+        }
+
+        @Override
+        public ShoppingListItem[] newArray(int size) {
+            return new ShoppingListItem[size];
+        }
+    };
 
     public long getShoppingListItemID() {
         return shoppingListItemID;
@@ -48,5 +70,18 @@ public class ShoppingListItem {
 
     public void setShoppingListItemShopName(String shoppingListItemShopName) {
         this.shoppingListItemShopName = shoppingListItemShopName;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(shoppingListItemID);
+        parcel.writeString(shoppingListItemName);
+        parcel.writeInt(shoppingListItemAmount);
+        parcel.writeString(shoppingListItemShopName);
     }
 }
