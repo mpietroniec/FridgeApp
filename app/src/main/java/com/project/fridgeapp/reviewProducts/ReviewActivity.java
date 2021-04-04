@@ -45,6 +45,8 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
         adapter = new ReviewAdapter(dataList, ReviewActivity.this, this);
         recyclerView.setAdapter(adapter);
 
+
+
         btnAddProduct = findViewById(R.id.fbtn_add_product);
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override

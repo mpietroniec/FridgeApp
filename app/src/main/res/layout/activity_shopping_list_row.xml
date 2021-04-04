@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv_shopping_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -74,8 +75,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:gravity="center_vertical"
-                    android:buttonTint="@color/design_default_color_primary" />
+                    android:buttonTint="@color/design_default_color_primary"
+                    android:gravity="center_vertical" />
 
             </LinearLayout>
 
@@ -89,12 +90,13 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/txt_btn_shopping_list_item_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:drawableStart="@drawable/ic_edit"
                 android:focusable="true"
-                android:text="Edit" />
+                android:text="Details" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -104,12 +106,13 @@
                 android:text="|" />
 
             <TextView
+                android:id="@+id/txt_btn_shopping_list_item_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:drawableStart="@drawable/ic_delete"
                 android:focusable="true"
-                android:text="Delete" />
+                android:text="Delete"
+                app:drawableStartCompat="@drawable/ic_delete" />
 
         </LinearLayout>
 
