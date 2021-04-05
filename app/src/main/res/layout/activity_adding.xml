@@ -16,9 +16,11 @@
         android:layout_marginTop="100dp"
         android:autofillHints="Product name"
         android:drawableStart="@drawable/ic_playlist_add"
+        android:drawablePadding="10dp"
         android:hint="@string/product_name"
         android:inputType="text"
-        android:textStyle="bold|italic" />
+        android:maxLines="1"
+        android:textStyle="italic" />
 
     <EditText
         android:id="@+id/etxt_add_amount"
@@ -27,18 +29,21 @@
         android:layout_marginTop="20dp"
         android:autofillHints="Amount"
         android:drawableStart="@drawable/ic_north_east"
+        android:drawablePadding="10dp"
         android:hint="@string/amount"
         android:inputType="number"
-        android:textStyle="bold|italic" />
+        android:maxLines="1"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/txt_expiration_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:drawablePadding="10dp"
         android:text="Expiration date (optional)"
-        android:drawablePadding="6dp"
         android:textSize="18sp"
+        android:textStyle="italic"
         app:drawableStartCompat="@drawable/ic_calendar_today" />
 
     <Button

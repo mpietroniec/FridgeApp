@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_image"
-        android:text="fridge image"
+        android:text="@string/fridge_image"
         android:textSize="30sp" />
 
 </LinearLayout>
