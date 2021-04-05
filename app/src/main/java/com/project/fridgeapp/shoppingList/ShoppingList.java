@@ -73,6 +73,32 @@ public class ShoppingList extends AppCompatActivity implements ItemClickListener
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.delete_all_shopping_list_items) {
             confirmDialog();
+        } else if (item.getItemId() == R.id.sort_by_name) {
+
+            recyclerView = findViewById(R.id.rv_shopping_list);
+
+            database = DatabaseHelper.getInstance(this);
+
+            dataList = database.shoppingListItemDao().getAllShoppingListByName();
+
+            linearLayoutManager = new LinearLayoutManager(this);
+
+            recyclerView.setLayoutManager(linearLayoutManager);
+            adapter = new ShoppingListAdapter(dataList, ShoppingList.this, this);
+            recyclerView.setAdapter(adapter);
+
+        } else if (item.getItemId() == R.id.sort_by_shop_name) {
+            recyclerView = findViewById(R.id.rv_shopping_list);
+
+            database = DatabaseHelper.getInstance(this);
+
+            dataList = database.shoppingListItemDao().getAllShoppingListByShopName();
+
+            linearLayoutManager = new LinearLayoutManager(this);
+
+            recyclerView.setLayoutManager(linearLayoutManager);
+            adapter = new ShoppingListAdapter(dataList, ShoppingList.this, this);
+            recyclerView.setAdapter(adapter);
         }
         return super.onOptionsItemSelected(item);
     }
