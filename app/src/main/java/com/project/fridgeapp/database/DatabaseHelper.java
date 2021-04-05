@@ -11,7 +11,7 @@ import com.project.fridgeapp.dao.ShoppingListItemDao;
 import com.project.fridgeapp.entities.FridgeProduct;
 import com.project.fridgeapp.entities.ShoppingListItem;
 
-@Database(entities = {FridgeProduct.class, ShoppingListItem.class}, version = 2, exportSchema = false)
+@Database(entities = {FridgeProduct.class, ShoppingListItem.class}, version = 3, exportSchema = false)
 public abstract class DatabaseHelper extends RoomDatabase {
     //Database instance
     private static DatabaseHelper database;

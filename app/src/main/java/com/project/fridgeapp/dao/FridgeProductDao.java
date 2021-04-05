@@ -4,9 +4,12 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.TypeConverters;
 
+import com.project.fridgeapp.helpers.DateTypeConverter;
 import com.project.fridgeapp.entities.FridgeProduct;
 
+import java.util.Date;
 import java.util.List;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
@@ -28,9 +31,10 @@ public interface FridgeProductDao {
     @Query("UPDATE fridge_product " +
             "SET " +
             "table_fridge_product_name = :sProductName, " +
-            "table_fridge_product_amount = :sAmount " +
+            "table_fridge_product_amount = :sAmount, " +
+            "table_fridge_product_expiration_date = :sExpirationDate " +
             "WHERE fridgeID = :sFridgeID")
-    void update(long sFridgeID, String sProductName, int sAmount);
+    void update(long sFridgeID, String sProductName, int sAmount, @TypeConverters(DateTypeConverter.class) Date sExpirationDate);
 
     //Get all data query
     @Query("SELECT * FROM fridge_product")

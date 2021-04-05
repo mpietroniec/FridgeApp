@@ -6,6 +6,11 @@ import android.os.Parcelable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.project.fridgeapp.helpers.DateTypeConverter;
+
+import java.util.Date;
 
 @Entity(tableName = "fridge_product")
 public class FridgeProduct implements Parcelable {
@@ -16,6 +21,9 @@ public class FridgeProduct implements Parcelable {
     private String fridgeProductName;
     @ColumnInfo(name = "table_fridge_product_amount")
     private int fridgeProductAmount;
+    @ColumnInfo(name = "table_fridge_product_expiration_date")
+    @TypeConverters({DateTypeConverter.class})
+    private Date fridgeProductExpirationDate;
 
     public FridgeProduct() {
     }
@@ -24,6 +32,7 @@ public class FridgeProduct implements Parcelable {
         fridgeID = in.readLong();
         fridgeProductName = in.readString();
         fridgeProductAmount = in.readInt();
+        fridgeProductExpirationDate = new Date(in.readLong());
     }
 
     public static final Creator<FridgeProduct> CREATOR = new Creator<FridgeProduct>() {
@@ -62,6 +71,14 @@ public class FridgeProduct implements Parcelable {
         this.fridgeProductAmount = fridgeProductAmount;
     }
 
+    public Date getFridgeProductExpirationDate() {
+        return fridgeProductExpirationDate;
+    }
+
+    public void setFridgeProductExpirationDate(Date fridgeProductExpirationDate) {
+        this.fridgeProductExpirationDate = fridgeProductExpirationDate;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -72,5 +89,6 @@ public class FridgeProduct implements Parcelable {
         parcel.writeLong(fridgeID);
         parcel.writeString(fridgeProductName);
         parcel.writeInt(fridgeProductAmount);
+        parcel.writeLong(fridgeProductExpirationDate.getTime());
     }
 }

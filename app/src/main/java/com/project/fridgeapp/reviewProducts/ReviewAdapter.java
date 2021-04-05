@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.project.fridgeapp.ItemClickListener;
 import com.project.fridgeapp.R;
+import com.project.fridgeapp.helpers.DateParser;
 import com.project.fridgeapp.database.DatabaseHelper;
 import com.project.fridgeapp.entities.FridgeProduct;
 import com.project.fridgeapp.update.UpdateFridgeProductActivity;
@@ -58,6 +59,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
         holder.txtProductID.setText(String.valueOf(position + 1));
         holder.txtName.setText(fridgeProduct.getFridgeProductName());
         holder.txtAmount.setText(String.valueOf(fridgeProduct.getFridgeProductAmount()));
+        holder.txtExpirationDate.setText(DateParser.dateToStringParser(fridgeProduct.getFridgeProductExpirationDate()));
         holder.cardViewReview.setOnClickListener(view -> {
             if (holder.expandableLinearLayout.getVisibility() == View.GONE) {
                 TransitionManager.beginDelayedTransition(holder.cardViewReview, new AutoTransition());
@@ -98,7 +100,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
     }
 
     public class FridgeProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView txtName, txtAmount, txtProductID, txtBtnEditFridgeProduct, txtBtnDeleteFridgeProduct;
+        private TextView txtName, txtAmount, txtProductID, txtBtnEditFridgeProduct, txtBtnDeleteFridgeProduct, txtExpirationDate;
         LinearLayout expandableLinearLayout;
         CardView cardViewReview;
         ItemClickListener itemClickListener;
@@ -108,6 +110,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
             txtProductID = itemView.findViewById(R.id.txt_product_id);
             txtName = itemView.findViewById(R.id.txt_product_name);
             txtAmount = itemView.findViewById(R.id.txt_product_amount);
+            txtExpirationDate = itemView.findViewById(R.id.txt_fridge_product_expiration_date);
+
             txtBtnEditFridgeProduct = itemView.findViewById(R.id.txt_btn_fridge_product_edit);
             txtBtnDeleteFridgeProduct = itemView.findViewById(R.id.txt_btn_fridge_product_delete);
             expandableLinearLayout = itemView.findViewById(R.id.ll_fridge_product_edit);
