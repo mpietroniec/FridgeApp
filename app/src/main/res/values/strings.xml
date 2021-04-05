@@ -8,4 +8,5 @@
     <string name="add">Add</string>
     <string name="amount">Amount</string>
     <string name="product_name">Product name</string>
+    <string name="fridge_image">fridge image</string>
 </resources>
