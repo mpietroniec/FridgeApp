@@ -19,6 +19,7 @@ import com.project.fridgeapp.helpers.DatePickerFragment;
 import com.project.fridgeapp.database.DatabaseHelper;
 import com.project.fridgeapp.entities.FridgeProduct;
 import com.project.fridgeapp.entities.ShoppingListItem;
+import com.project.fridgeapp.shoppingList.ShoppingList;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -62,14 +63,11 @@ public class UpdateFridgeProductActivity extends AppCompatActivity implements Da
         });
 
         btnUpdate = findViewById(R.id.btn_update_product);
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String sProductName = etxtUpdateName.getText().toString().trim();
-                int sAmount = Integer.parseInt(etxtUpdateAmount.getText().toString().trim());
-                Date sExpirationDate = DateParser.stringToDateParser(txtUpdateDate.getText().toString().trim());
-                database.fridgeProductDao().update(sFridgeID, sProductName, sAmount, sExpirationDate);
-            }
+        btnUpdate.setOnClickListener(view -> {
+            String sProductName1 = etxtUpdateName.getText().toString().trim();
+            int sAmount1 = Integer.parseInt(etxtUpdateAmount.getText().toString().trim());
+            Date sExpirationDate1 = DateParser.stringToDateParser(txtUpdateDate.getText().toString().trim());
+            database.fridgeProductDao().update(sFridgeID, sProductName1, sAmount1, sExpirationDate1);
         });
     }
 
