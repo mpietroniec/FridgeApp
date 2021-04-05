@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/addition"
     android:layout_width="match_parent"
@@ -30,6 +31,15 @@
         android:inputType="number"
         android:textStyle="bold|italic" />
 
+    <TextView
+        android:id="@+id/txt_expiration_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Expiration date (optional)"
+        android:drawablePadding="6dp"
+        android:textSize="18sp"
+        app:drawableStartCompat="@drawable/ic_calendar_today" />
 
     <Button
         android:id="@+id/btn_add_product"
