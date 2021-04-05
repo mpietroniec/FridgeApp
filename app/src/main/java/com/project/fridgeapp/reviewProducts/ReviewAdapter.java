@@ -56,7 +56,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
         FridgeProduct fridgeProduct = fridgeProductsList.get(position);
         //Initialize database
         database = DatabaseHelper.getInstance(context);
-        holder.txtProductID.setText(String.valueOf(position + 1));
         holder.txtName.setText(fridgeProduct.getFridgeProductName());
         holder.txtAmount.setText(String.valueOf(fridgeProduct.getFridgeProductAmount()));
         holder.txtExpirationDate.setText(DateParser.dateToStringParser(fridgeProduct.getFridgeProductExpirationDate()));
@@ -100,14 +99,13 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
     }
 
     public class FridgeProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView txtName, txtAmount, txtProductID, txtBtnEditFridgeProduct, txtBtnDeleteFridgeProduct, txtExpirationDate;
+        private TextView txtName, txtAmount, txtBtnEditFridgeProduct, txtBtnDeleteFridgeProduct, txtExpirationDate;
         LinearLayout expandableLinearLayout;
         CardView cardViewReview;
         ItemClickListener itemClickListener;
 
         public FridgeProductsViewHolder(@NonNull View itemView, ItemClickListener itemClickListener) {
             super(itemView);
-            txtProductID = itemView.findViewById(R.id.txt_product_id);
             txtName = itemView.findViewById(R.id.txt_product_name);
             txtAmount = itemView.findViewById(R.id.txt_product_amount);
             txtExpirationDate = itemView.findViewById(R.id.txt_fridge_product_expiration_date);

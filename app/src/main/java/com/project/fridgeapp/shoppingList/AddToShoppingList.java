@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.project.fridgeapp.R;
 import com.project.fridgeapp.database.DatabaseHelper;
@@ -36,28 +37,31 @@ public class AddToShoppingList extends AppCompatActivity {
         etxtShopListItemShopName = findViewById(R.id.etxt_shopping_list_add_shop_name);
 
         btnAddToShoppingList = findViewById(R.id.btn_shopping_list_add);
-        btnAddToShoppingList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String sShoppingListItemName = etxtShopListItemName.getText().toString().trim();
-                String sShoppingListItemAmount = etxtShopListItemAmount.getText().toString().trim();
-                String sShoppingListItemShopName = etxtShopListItemShopName.getText().toString().trim();
+        btnAddToShoppingList.setOnClickListener(view -> {
+            String sShoppingListItemName = etxtShopListItemName.getText().toString().trim();
+            String sShoppingListItemAmount = etxtShopListItemAmount.getText().toString().trim();
+            String sShoppingListItemShopName = etxtShopListItemShopName.getText().toString().trim();
 
-                if (!sShoppingListItemName.equals("") && !sShoppingListItemAmount.equals("") && !sShoppingListItemShopName.equals("")) {
-                    ShoppingListItem shoppingListItem = new ShoppingListItem();
-                    int dbShoppingListItemAmount = Integer.parseInt(sShoppingListItemAmount);
-                    shoppingListItem.setShoppingListItemName(sShoppingListItemName);
-                    shoppingListItem.setShoppingListItemAmount(dbShoppingListItemAmount);
-                    shoppingListItem.setShoppingListItemShopName(sShoppingListItemShopName);
-                    databaseHelper.shoppingListItemDao().insert(shoppingListItem);
+            if (!sShoppingListItemName.equals("") && !sShoppingListItemAmount.equals("") && !sShoppingListItemShopName.equals("")) {
+                ShoppingListItem shoppingListItem = new ShoppingListItem();
+                int dbShoppingListItemAmount = Integer.parseInt(sShoppingListItemAmount);
+                shoppingListItem.setShoppingListItemName(sShoppingListItemName);
+                shoppingListItem.setShoppingListItemAmount(dbShoppingListItemAmount);
+                shoppingListItem.setShoppingListItemShopName(sShoppingListItemShopName);
+                databaseHelper.shoppingListItemDao().insert(shoppingListItem);
 
-                    etxtShopListItemName.setText("");
-                    etxtShopListItemAmount.setText("");
-                    etxtShopListItemShopName.setText("");
+                etxtShopListItemName.setText("");
+                etxtShopListItemAmount.setText("");
+                etxtShopListItemShopName.setText("");
 
-                    shoppingListItemsList.clear();
-                    shoppingListItemsList.addAll(databaseHelper.shoppingListItemDao().getAllShoppingListItems());
-                }
+                Toast.makeText(AddToShoppingList.this, "Added!.", Toast.LENGTH_SHORT).show();
+
+                shoppingListItemsList.clear();
+                shoppingListItemsList.addAll(databaseHelper.shoppingListItemDao().getAllShoppingListItems());
+            } else if (sShoppingListItemName.equals("") && !sShoppingListItemAmount.equals("") && !sShoppingListItemShopName.equals("")) {
+                Toast.makeText(AddToShoppingList.this, "Enter the product name.", Toast.LENGTH_SHORT).show();
+            } else if (sShoppingListItemName.equals("") && sShoppingListItemAmount.equals("") && !sShoppingListItemShopName.equals("")) {
+                Toast.makeText(AddToShoppingList.this, "Enter the product amount.", Toast.LENGTH_SHORT).show();
             }
         });
     }

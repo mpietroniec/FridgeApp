@@ -38,7 +38,7 @@
         android:layout_marginTop="20dp"
         android:drawableStart="@drawable/ic_shopping_cart"
         android:drawablePadding="10dp"
-        android:hint="Shop"
+        android:hint="Shop name (optional)"
         android:maxLines="1"
         android:textStyle="italic" />
 
