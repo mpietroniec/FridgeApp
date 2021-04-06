@@ -42,7 +42,7 @@ public class AddToShoppingList extends AppCompatActivity {
             String sShoppingListItemAmount = etxtShopListItemAmount.getText().toString().trim();
             String sShoppingListItemShopName = etxtShopListItemShopName.getText().toString().trim();
 
-            if (!sShoppingListItemName.equals("") && !sShoppingListItemAmount.equals("") && !sShoppingListItemShopName.equals("")) {
+            if (!sShoppingListItemName.equals("") && !sShoppingListItemAmount.equals("")) {
                 ShoppingListItem shoppingListItem = new ShoppingListItem();
                 int dbShoppingListItemAmount = Integer.parseInt(sShoppingListItemAmount);
                 shoppingListItem.setShoppingListItemName(sShoppingListItemName);

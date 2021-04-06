@@ -56,7 +56,10 @@ public class UpdateFridgeProductActivity extends AppCompatActivity implements Da
         etxtUpdateAmount.setText(String.valueOf(sAmount));
 
         txtUpdateDate = findViewById(R.id.txt_update_expiration_date);
-        txtUpdateDate.setText(dateFormat(sExpirationDate));
+        if (!sExpirationDate.toString().equals("Thu Jan 01 00:00:00 GMT 1970")) {
+            txtUpdateDate.setText(dateFormat(sExpirationDate));
+        }
+
         txtUpdateDate.setOnClickListener(view -> {
             DialogFragment datePicker = new DatePickerFragment();
             datePicker.show(getSupportFragmentManager(), "date picker");
@@ -71,10 +74,10 @@ public class UpdateFridgeProductActivity extends AppCompatActivity implements Da
         });
     }
 
-    public String dateFormat(Date date){
+    public String dateFormat(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = dateFormat.format(date.getTime());
-        return  dateString;
+        return dateString;
     }
 
     @Override

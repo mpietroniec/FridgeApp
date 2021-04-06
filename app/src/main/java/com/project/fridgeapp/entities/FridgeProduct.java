@@ -89,6 +89,8 @@ public class FridgeProduct implements Parcelable {
         parcel.writeLong(fridgeID);
         parcel.writeString(fridgeProductName);
         parcel.writeInt(fridgeProductAmount);
-        parcel.writeLong(fridgeProductExpirationDate.getTime());
+        if (fridgeProductExpirationDate != null) {
+            parcel.writeLong(fridgeProductExpirationDate.getTime());
+        }
     }
 }

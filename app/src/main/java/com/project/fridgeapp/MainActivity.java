@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
         viewProductsBtn = findViewById(R.id.btn_view);
         imageFridgeBtn = findViewById(R.id.btn_image);
 
+        viewProductsBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ReviewActivity.class);
+            startActivity(intent);
+        });
+
         addProductBtn.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddingActivity.class);
             startActivity(intent);
@@ -36,11 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
         shoppingListBtn.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, ShoppingList.class);
-            startActivity(intent);
-        });
-
-        viewProductsBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, ReviewActivity.class);
             startActivity(intent);
         });
 

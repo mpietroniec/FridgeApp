@@ -58,7 +58,11 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
         database = DatabaseHelper.getInstance(context);
         holder.txtName.setText(fridgeProduct.getFridgeProductName());
         holder.txtAmount.setText(String.valueOf(fridgeProduct.getFridgeProductAmount()));
-        holder.txtExpirationDate.setText(DateParser.dateToStringParser(fridgeProduct.getFridgeProductExpirationDate()));
+        if (fridgeProduct.getFridgeProductExpirationDate() != null) {
+            holder.txtExpirationDate.setText(DateParser.dateToStringParser(fridgeProduct.getFridgeProductExpirationDate()));
+            TransitionManager.beginDelayedTransition(holder.cardViewReview, new AutoTransition());
+            holder.expirationDateLinearLayout.setVisibility(View.VISIBLE);
+        }
         holder.cardViewReview.setOnClickListener(view -> {
             if (holder.expandableLinearLayout.getVisibility() == View.GONE) {
                 TransitionManager.beginDelayedTransition(holder.cardViewReview, new AutoTransition());
@@ -100,7 +104,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
 
     public class FridgeProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView txtName, txtAmount, txtBtnEditFridgeProduct, txtBtnDeleteFridgeProduct, txtExpirationDate;
-        LinearLayout expandableLinearLayout;
+        LinearLayout expandableLinearLayout, expirationDateLinearLayout;
         CardView cardViewReview;
         ItemClickListener itemClickListener;
 
@@ -113,6 +117,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
             txtBtnEditFridgeProduct = itemView.findViewById(R.id.txt_btn_fridge_product_edit);
             txtBtnDeleteFridgeProduct = itemView.findViewById(R.id.txt_btn_fridge_product_delete);
             expandableLinearLayout = itemView.findViewById(R.id.ll_fridge_product_edit);
+            expirationDateLinearLayout = itemView.findViewById(R.id.ll_expiration_date);
             cardViewReview = itemView.findViewById(R.id.cv_review);
             this.itemClickListener = itemClickListener;
             itemView.setOnClickListener(this);

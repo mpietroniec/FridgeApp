@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DateParser {
-    static String dateTemplate = "yyyy-M-dd";
+    static String dateTemplate = "yyyy-MM-dd";
     static SimpleDateFormat formatter = new SimpleDateFormat(dateTemplate, Locale.ENGLISH);
 
     public static Date stringToDateParser(String date) {

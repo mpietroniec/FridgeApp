@@ -52,7 +52,11 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         database = DatabaseHelper.getInstance(context);
         holder.txtName.setText(shoppingListItem.getShoppingListItemName());
         holder.txtAmount.setText(String.valueOf(shoppingListItem.getShoppingListItemAmount()));
-        holder.txtShopName.setText(shoppingListItem.getShoppingListItemShopName());
+        if (!shoppingListItem.getShoppingListItemShopName().equals("")) {
+            holder.txtShopName.setText(shoppingListItem.getShoppingListItemShopName());
+            TransitionManager.beginDelayedTransition(holder.cardViewShoppingList, new AutoTransition());
+            holder.shopNameLinearLayout.setVisibility(View.VISIBLE);
+        }
         holder.txtBtnEditShoppingListItem.setOnClickListener(view -> {
             Intent intent = new Intent(context, UpdateShoppingListItemActivity.class);
             intent.putExtra("Shopping List Item", shoppingListItemsList.get(position));
@@ -92,7 +96,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
     public class ShoppingListItemsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView txtName, txtAmount, txtShopName, txtBtnEditShoppingListItem, txtBtnDeleteShoppingListItem;
-        private LinearLayout expandableLinearLayout;
+        private LinearLayout expandableLinearLayout, shopNameLinearLayout;
         private CardView cardViewShoppingList;
         private ItemClickListener itemClickListener;
 
@@ -104,6 +108,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
             txtBtnEditShoppingListItem = itemView.findViewById(R.id.txt_btn_shopping_list_item_edit);
             txtBtnDeleteShoppingListItem = itemView.findViewById(R.id.txt_btn_shopping_list_item_delete);
             expandableLinearLayout = itemView.findViewById(R.id.ll_shopping_list_item_edit);
+            shopNameLinearLayout = itemView.findViewById(R.id.ll_shop_name);
             cardViewShoppingList = itemView.findViewById(R.id.cv_shopping_list_item);
             this.itemClickListener = itemClickListener;
             itemView.setOnClickListener(this);
