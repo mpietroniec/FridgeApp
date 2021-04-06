@@ -39,4 +39,7 @@ public interface FridgeProductDao {
     //Get all data query
     @Query("SELECT * FROM fridge_product")
     List<FridgeProduct> getAllFridgeProducts();
+
+    @Query("SELECT * FROM fridge_product ORDER BY table_fridge_product_expiration_date")
+    List<FridgeProduct> getAllFridgeProductsByExpirationDate();
 }

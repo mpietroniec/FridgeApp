@@ -1,24 +1,22 @@
 package com.project.fridgeapp.shoppingList;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.project.fridgeapp.ItemClickListener;
 import com.project.fridgeapp.R;
 import com.project.fridgeapp.database.DatabaseHelper;
 import com.project.fridgeapp.entities.ShoppingListItem;
-import com.project.fridgeapp.reviewProducts.ReviewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,17 +36,10 @@ public class ShoppingList extends AppCompatActivity implements ItemClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_list);
 
-        recyclerView = findViewById(R.id.rv_shopping_list);
-
         database = DatabaseHelper.getInstance(this);
 
         dataList = database.shoppingListItemDao().getAllShoppingListItems();
-
-        linearLayoutManager = new LinearLayoutManager(this);
-
-        recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new ShoppingListAdapter(dataList, ShoppingList.this, this);
-        recyclerView.setAdapter(adapter);
+        initRecyclerView(dataList);
 
         btnAddToShoppingList = findViewById(R.id.fbtn_open_shopping_list);
         btnAddToShoppingList.setOnClickListener(view -> {
@@ -65,7 +56,7 @@ public class ShoppingList extends AppCompatActivity implements ItemClickListener
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_delete_all_shopping_list_items, menu);
+        inflater.inflate(R.menu.menu_shopping_list_items, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -75,30 +66,18 @@ public class ShoppingList extends AppCompatActivity implements ItemClickListener
             confirmDialog();
         } else if (item.getItemId() == R.id.sort_by_name) {
 
-            recyclerView = findViewById(R.id.rv_shopping_list);
-
             database = DatabaseHelper.getInstance(this);
 
             dataList = database.shoppingListItemDao().getAllShoppingListByName();
-
-            linearLayoutManager = new LinearLayoutManager(this);
-
-            recyclerView.setLayoutManager(linearLayoutManager);
-            adapter = new ShoppingListAdapter(dataList, ShoppingList.this, this);
-            recyclerView.setAdapter(adapter);
+            initRecyclerView(dataList);
 
         } else if (item.getItemId() == R.id.sort_by_shop_name) {
-            recyclerView = findViewById(R.id.rv_shopping_list);
 
             database = DatabaseHelper.getInstance(this);
 
             dataList = database.shoppingListItemDao().getAllShoppingListByShopName();
+            initRecyclerView(dataList);
 
-            linearLayoutManager = new LinearLayoutManager(this);
-
-            recyclerView.setLayoutManager(linearLayoutManager);
-            adapter = new ShoppingListAdapter(dataList, ShoppingList.this, this);
-            recyclerView.setAdapter(adapter);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -117,5 +96,15 @@ public class ShoppingList extends AppCompatActivity implements ItemClickListener
 
         });
         builder.show();
+    }
+
+    void initRecyclerView(List<ShoppingListItem> dataList) {
+        recyclerView = findViewById(R.id.rv_shopping_list);
+
+        linearLayoutManager = new LinearLayoutManager(this);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new ShoppingListAdapter(dataList, ShoppingList.this, this);
+        recyclerView.setAdapter(adapter);
     }
 }

@@ -37,18 +37,9 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
 
-        recyclerView = findViewById(R.id.rv_review_products);
-
         database = DatabaseHelper.getInstance(this);
-
         dataList = database.fridgeProductDao().getAllFridgeProducts();
-
-        linearLayoutManager = new LinearLayoutManager(this);
-
-        recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new ReviewAdapter(dataList, ReviewActivity.this, this);
-        recyclerView.setAdapter(adapter);
-
+        initRecyclerView(dataList);
 
         btnAddProduct = findViewById(R.id.fbtn_add_product);
         btnAddProduct.setOnClickListener(view -> {
@@ -65,7 +56,7 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_delete_all_fridge_products, menu);
+        inflater.inflate(R.menu.menu_fridge_products, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -73,6 +64,10 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.delete_all) {
             confirmDialog();
+        } else if (item.getItemId() == R.id.sort_by_expiration_date) {
+            database = DatabaseHelper.getInstance(this);
+            dataList = database.fridgeProductDao().getAllFridgeProductsByExpirationDate();
+            initRecyclerView(dataList);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -91,5 +86,14 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
 
         });
         builder.show();
+    }
+
+    void initRecyclerView(List<FridgeProduct> dataList) {
+        recyclerView = findViewById(R.id.rv_review_products);
+        linearLayoutManager = new LinearLayoutManager(this);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new ReviewAdapter(dataList, ReviewActivity.this, this);
+        recyclerView.setAdapter(adapter);
     }
 }

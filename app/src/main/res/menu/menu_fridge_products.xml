@@ -7,5 +7,10 @@
         android:icon="@drawable/ic_delete"
         android:title="Delete all"
         app:showAsAction="always" />
+    <group>
+        <item
+            android:id="@+id/sort_by_expiration_date"
+            android:title="Sort by expiration date" />
+    </group>
 
 </menu>

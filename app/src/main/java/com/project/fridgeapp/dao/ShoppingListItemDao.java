@@ -41,6 +41,6 @@ public interface ShoppingListItemDao {
     @Query("SELECT * FROM shopping_list_item ORDER BY shopping_list_item_name")
     List<ShoppingListItem> getAllShoppingListByName();
 
-    @Query("SELECT * FROM shopping_list_item ORDER BY shopping_list_item_shop_name ASC")
+    @Query("SELECT * FROM shopping_list_item ORDER BY shopping_list_item_shop_name")
     List<ShoppingListItem> getAllShoppingListByShopName();
 }
