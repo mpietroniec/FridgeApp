@@ -36,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:autofillHints="Shop name (optional)"
         android:drawableStart="@drawable/ic_shopping_cart"
         android:drawablePadding="10dp"
         android:hint="Shop name (optional)"

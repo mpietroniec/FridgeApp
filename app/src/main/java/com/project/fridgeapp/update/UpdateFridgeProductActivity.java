@@ -7,13 +7,18 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.zxing.integration.android.IntentIntegrator;
 import com.project.fridgeapp.R;
+import com.project.fridgeapp.helpers.Capture;
 import com.project.fridgeapp.helpers.DateParser;
 import com.project.fridgeapp.helpers.DatePickerFragment;
 import com.project.fridgeapp.database.DatabaseHelper;
@@ -28,7 +33,8 @@ import java.util.List;
 
 public class UpdateFridgeProductActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private EditText etxtUpdateName, etxtUpdateAmount;
-    private TextView txtUpdateDate;
+    private TextView txtUpdateDate, txtUpdateScanBarcode;
+    private ImageView ivDeleteDate;
     private Button btnUpdate;
     private DatabaseHelper database;
     private Context context;
@@ -52,13 +58,50 @@ public class UpdateFridgeProductActivity extends AppCompatActivity implements Da
         etxtUpdateName = findViewById(R.id.etxt_update_name);
         etxtUpdateName.setText(sProductName);
 
+        txtUpdateScanBarcode = findViewById(R.id.txt_update_scan_barcode);
+        txtUpdateScanBarcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentIntegrator intentIntegrator = new IntentIntegrator(UpdateFridgeProductActivity.this);
+                intentIntegrator.setBeepEnabled(true);
+                intentIntegrator.setOrientationLocked(true);
+                intentIntegrator.setCaptureActivity(Capture.class);
+                intentIntegrator.initiateScan();
+            }
+        });
+
         etxtUpdateAmount = findViewById(R.id.etxt_update_amount);
         etxtUpdateAmount.setText(String.valueOf(sAmount));
+
+        ivDeleteDate = findViewById(R.id.iv_delete_date_in_update_activity);
 
         txtUpdateDate = findViewById(R.id.txt_update_expiration_date);
         if (!sExpirationDate.toString().equals("Thu Jan 01 00:00:00 GMT 1970")) {
             txtUpdateDate.setText(dateFormat(sExpirationDate));
+            ivDeleteDate.setVisibility(View.VISIBLE);
         }
+
+        txtUpdateDate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                ivDeleteDate.setVisibility(View.VISIBLE);
+            }
+        });
+
+        ivDeleteDate.setOnClickListener(view -> {
+            txtUpdateDate.setText("");
+            ivDeleteDate.setVisibility(View.GONE);
+        });
 
         txtUpdateDate.setOnClickListener(view -> {
             DialogFragment datePicker = new DatePickerFragment();
