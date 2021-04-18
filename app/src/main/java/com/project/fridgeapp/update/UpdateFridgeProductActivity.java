@@ -1,8 +1,5 @@
 package com.project.fridgeapp.update;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,15 +13,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.project.fridgeapp.R;
-import com.project.fridgeapp.helpers.Capture;
-import com.project.fridgeapp.helpers.DateParser;
-import com.project.fridgeapp.helpers.DatePickerFragment;
 import com.project.fridgeapp.database.DatabaseHelper;
 import com.project.fridgeapp.entities.FridgeProduct;
 import com.project.fridgeapp.entities.ShoppingListItem;
-import com.project.fridgeapp.shoppingList.ShoppingList;
+import com.project.fridgeapp.helpers.Capture;
+import com.project.fridgeapp.helpers.DateParser;
+import com.project.fridgeapp.helpers.DatePickerFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

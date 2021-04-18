@@ -3,6 +3,7 @@
     package="com.project.fridgeapp">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -38,7 +39,7 @@
             android:name=".shoppingList.ShoppingList"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".addition.AddingActivity"
+            android:name=".reviewProducts.AddingActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>

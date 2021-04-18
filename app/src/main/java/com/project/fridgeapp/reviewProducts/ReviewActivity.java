@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.project.fridgeapp.ItemClickListener;
 import com.project.fridgeapp.R;
-import com.project.fridgeapp.addition.AddingActivity;
 import com.project.fridgeapp.database.DatabaseHelper;
 import com.project.fridgeapp.entities.FridgeProduct;
 

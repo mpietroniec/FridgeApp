@@ -43,6 +43,7 @@
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="@string/product_name"
                         android:textSize="18sp" />
 
@@ -64,6 +65,8 @@
                         android:id="@+id/txt_shopping_list_amount"
                         android:layout_width="80dp"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="@string/amount"
                         android:textSize="16sp" />
 
@@ -102,6 +105,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="Shop"
                         android:textSize="16sp" />
 

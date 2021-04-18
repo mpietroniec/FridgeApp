@@ -10,7 +10,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.project.fridgeapp.addition.AddingActivity;
+import com.project.fridgeapp.reviewProducts.AddingActivity;
 import com.project.fridgeapp.fridgeImage.FridgeImageActivity;
 import com.project.fridgeapp.reviewProducts.ReviewActivity;
 import com.project.fridgeapp.shoppingList.ShoppingList;
