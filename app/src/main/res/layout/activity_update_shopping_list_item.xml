@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_shopping_cart"
             android:drawablePadding="10dp"
-            android:hint="Shop name (optional)"
+            android:hint="@string/shop_name_optional"
             android:textStyle="italic" />
 
         <View
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginTop="20dp"
-        android:text="update"
+        android:text="@string/update"
         android:textColor="#FFFFFF" />
 
 </LinearLayout>

@@ -4,14 +4,17 @@
     <item
         android:id="@+id/delete_all_shopping_list_items"
         android:icon="@drawable/ic_delete"
-        android:title="Delete all"
+        android:title="@string/delete_all"
         app:showAsAction="ifRoom" />
     <group>
         <item
             android:id="@+id/sort_by_name"
-            android:title="Sort by name" />
+            android:title="@string/sort_by_name" />
         <item
             android:id="@+id/sort_by_shop_name"
-            android:title="Sort by shop name" />
+            android:title="@string/sort_by_shop_name" />
+        <item
+            android:id="@+id/remove_marked"
+            android:title="@string/remove_marked" />
     </group>
 </menu>

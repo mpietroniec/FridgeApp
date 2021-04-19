@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:drawablePadding="10dp"
-        android:text="Scan barcode"
+        android:text="@string/scan_barcode"
         android:textSize="18sp"
         app:drawableStartCompat="@drawable/ic_qr_code_scanner" />
 
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="10dp"
-            android:hint="Expiration date (optional)"
+            android:hint="@string/expiration_date_optional"
             android:textSize="18sp"
             app:drawableStartCompat="@drawable/ic_calendar_today" />
 
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginTop="20dp"
-        android:text="Update"
+        android:text="@string/update"
         android:textColor="#FFFFFF" />
 
 </LinearLayout>

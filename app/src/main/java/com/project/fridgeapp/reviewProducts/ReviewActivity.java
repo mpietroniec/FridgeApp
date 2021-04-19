@@ -73,15 +73,15 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
 
     void confirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete all?");
-        builder.setMessage("Are you sure you want to delete everything?");
-        builder.setPositiveButton("Yes", (dialog, which) -> {
+        builder.setTitle(R.string.delete_all_q);
+        builder.setMessage(R.string.delete_everything);
+        builder.setPositiveButton(R.string.yes, (dialog, which) -> {
             database = DatabaseHelper.getInstance(this);
             database.fridgeProductDao().deleteAll(dataList);
             Intent intent = new Intent(ReviewActivity.this, ReviewActivity.class);
             startActivity(intent);
         });
-        builder.setNegativeButton("Nie", (dialog, which) -> {
+        builder.setNegativeButton(R.string.no, (dialog, which) -> {
 
         });
         builder.show();
