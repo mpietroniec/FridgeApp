@@ -81,16 +81,16 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
 
         holder.txtBtnDeleteFridgeProduct.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(view.getRootView().getContext());
-            builder.setTitle("Delete?")
-                    .setMessage("Are you sure you want to delete?")
-                    .setPositiveButton("yes", (dialog, which) -> {
+            builder.setTitle(R.string.delete_q)
+                    .setMessage(R.string.want_to_delete)
+                    .setPositiveButton(R.string.yes, (dialog, which) -> {
                         FridgeProduct item = fridgeProductsList.get(holder.getAdapterPosition());
                         database.fridgeProductDao().delete(item);
                         int pos = holder.getAdapterPosition();
                         fridgeProductsList.remove(pos);
                         notifyItemRemoved(pos);
                         notifyItemRangeChanged(pos, fridgeProductsList.size());
-                    }).setNegativeButton("no", (dialog, which) -> {
+                    }).setNegativeButton(R.string.no, (dialog, which) -> {
                 dialog.cancel();
             });
             builder.show();

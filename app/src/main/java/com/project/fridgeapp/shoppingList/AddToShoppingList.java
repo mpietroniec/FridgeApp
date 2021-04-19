@@ -76,22 +76,25 @@ public class AddToShoppingList extends AppCompatActivity {
                 shoppingListItem.setShoppingListItemName(sShoppingListItemName);
                 shoppingListItem.setShoppingListItemAmount(dbShoppingListItemAmount);
                 shoppingListItem.setShoppingListItemShopName(sShoppingListItemShopName);
-                databaseHelper.shoppingListItemDao().insert(shoppingListItem);
+                long result = databaseHelper.shoppingListItemDao().insert(shoppingListItem);
+                if (result != -1) {
+                    Toast.makeText(AddToShoppingList.this, R.string.added, Toast.LENGTH_SHORT).show();
 
-                etxtShopListItemName.setText("");
-                etxtShopListItemAmount.setText("");
-                etxtShopListItemShopName.setText("");
+                    shoppingListItemsList.clear();
+                    shoppingListItemsList.addAll(databaseHelper.shoppingListItemDao().getAllShoppingListItems());
 
-                Toast.makeText(AddToShoppingList.this, "Added!.", Toast.LENGTH_SHORT).show();
-
-                shoppingListItemsList.clear();
-                shoppingListItemsList.addAll(databaseHelper.shoppingListItemDao().getAllShoppingListItems());
+                    etxtShopListItemName.setText("");
+                    etxtShopListItemAmount.setText("");
+                    etxtShopListItemShopName.setText("");
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.failed, Toast.LENGTH_SHORT).show();
+                }
             } else if (sShoppingListItemName.equals("") && !sShoppingListItemAmount.equals("") && !sShoppingListItemShopName.equals("")) {
-                Toast.makeText(AddToShoppingList.this, "Enter the product name.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddToShoppingList.this, R.string.complete_the_name, Toast.LENGTH_SHORT).show();
             } else if (sShoppingListItemName.equals("") && sShoppingListItemAmount.equals("") && !sShoppingListItemShopName.equals("")) {
-                Toast.makeText(AddToShoppingList.this, "Enter the product amount.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddToShoppingList.this, R.string.complete_the_amount, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(AddToShoppingList.this, "Uzupełnij puste pola.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddToShoppingList.this, R.string.fill_in_the_blanks, Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -14,8 +14,8 @@ import static androidx.room.OnConflictStrategy.REPLACE;
 @Dao
 public interface ShoppingListItemDao {
 
-    @Insert(onConflict = REPLACE)
-    void insert(ShoppingListItem shoppingListItem);
+    @Insert
+    long insert(ShoppingListItem shoppingListItem);
 
     @Delete
     void delete(ShoppingListItem shoppingListItem);

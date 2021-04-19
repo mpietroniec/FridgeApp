@@ -5,12 +5,12 @@
     <item
         android:id="@+id/delete_all"
         android:icon="@drawable/ic_delete"
-        android:title="Delete all"
+        android:title="@string/delete_all"
         app:showAsAction="always" />
     <group>
         <item
             android:id="@+id/sort_by_expiration_date"
-            android:title="Sort by expiration date" />
+            android:title="@string/sort_by_expiration_date" />
     </group>
 
 </menu>

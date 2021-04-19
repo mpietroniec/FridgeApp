@@ -17,8 +17,8 @@ import static androidx.room.OnConflictStrategy.REPLACE;
 @Dao
 public interface FridgeProductDao {
 
-    @Insert(onConflict = REPLACE)
-    void insert(FridgeProduct fridgeProduct);
+    @Insert
+    long insert(FridgeProduct fridgeProduct);
 
     @Delete
     void delete(FridgeProduct fridgeProduct);

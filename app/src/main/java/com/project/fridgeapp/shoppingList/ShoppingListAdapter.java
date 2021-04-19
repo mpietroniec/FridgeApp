@@ -64,16 +64,16 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         });
         holder.txtBtnDeleteShoppingListItem.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(view.getRootView().getContext());
-            builder.setTitle("Delete?")
-                    .setMessage("Are you sure you want to delete?")
-                    .setPositiveButton("yes", (dialog, which) -> {
+            builder.setTitle(R.string.delete_q)
+                    .setMessage(R.string.want_to_delete)
+                    .setPositiveButton(R.string.yes, (dialog, which) -> {
                         ShoppingListItem item = shoppingListItemsList.get(holder.getAdapterPosition());
                         database.shoppingListItemDao().delete(item);
                         int pos = holder.getAdapterPosition();
                         shoppingListItemsList.remove(pos);
                         notifyItemRemoved(pos);
                         notifyItemRangeChanged(pos, shoppingListItemsList.size());
-                    }).setNegativeButton("no", (dialog, which) -> {
+                    }).setNegativeButton(R.string.no, (dialog, which) -> {
                 dialog.cancel();
             });
             builder.show();

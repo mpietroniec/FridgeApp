@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FridgeApp</string>
+    <string name="remove_marked">Usuń zaznaczone</string>
+    <string name="delete_all">Usuń wszystkie</string>
+    <string name="sort_by_shop_name">Sortuj po nazwie sklepu</string>
+    <string name="sort_by_name">Sortuj alfabetycznie</string>
+    <string name="product_name">Nazwa produktu</string>
+    <string name="amount">Ilość</string>
+    <string name="add">Dodaj</string>
+    <string name="back">Wstecz</string>
+    <string name="add_products">Dodaj produkt</string>
+    <string name="shopping_list">Lista zakupów</string>
+    <string name="view_products">Wyświetl produkty</string>
+    <string name="next_product">Następny produkt</string>
+    <string name="fridge_image">Zdjęcie zapasów</string>
+    <string name="sort_by_expiration_date">Sortuj po dacie przydatności</string>
+    <string name="shop_name_optional">Nazwa sklepu (opcjonalnie)</string>
+    <string name="update">Zaktualizuj</string>
+    <string name="scan_barcode">Skanuj kod kreskowy</string>
+    <string name="expiration_date_optional">Data przydatności (opcjonalnie)</string>
+    <string name="name">"Nazwa: "</string>
+    <string name="amount2">"Ilość: "</string>
+    <string name="shop_name">"Nazwa sklepu: "</string>
+    <string name="shop">Sklep</string>
+    <string name="details">Szczegóły</string>
+    <string name="delete">Usuń</string>
+    <string name="expiration_date2">"Data przydatności: "</string>
+    <string name="expiration_date">Data przydatności</string>
+    <string name="complete_the_name">Uzupełnij nazwę</string>
+    <string name="complete_the_amount">Uzupełnij ilość</string>
+    <string name="fill_in_the_blanks">Uzupełnij puste pola</string>
+    <string name="not_found">Nie znaleziono</string>
+    <string name="delete_all_q">Usunąć wszystko?</string>
+    <string name="delete_everything">Czy na pewno usunąć wsszystko?</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="delete_q">Usunąć</string>
+    <string name="want_to_delete">Czy na pewno chcesz to usunąć?</string>
+    <string name="added">Dodano!</string>
+</resources>

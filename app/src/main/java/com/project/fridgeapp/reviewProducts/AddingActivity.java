@@ -123,15 +123,25 @@ public class AddingActivity extends AppCompatActivity implements DatePickerDialo
                 fridgeProduct.setFridgeProductName(sProductName);
                 fridgeProduct.setFridgeProductAmount(dbAmount);
                 fridgeProduct.setFridgeProductExpirationDate(DateParser.stringToDateParser(sExpirationDate));
-                databaseHelper.fridgeProductDao().insert(fridgeProduct);
-                fridgeProductsList.clear();
-                fridgeProductsList.addAll(databaseHelper.fridgeProductDao().getAllFridgeProducts());
+                long result = databaseHelper.fridgeProductDao().insert(fridgeProduct);
+                if (result != -1) {
+                    Toast.makeText(getApplicationContext(), R.string.added, Toast.LENGTH_SHORT).show();
+
+                    fridgeProductsList.clear();
+                    fridgeProductsList.addAll(databaseHelper.fridgeProductDao().getAllFridgeProducts());
+
+                    etxtProductName.setText("");
+                    etxtProductAmount.setText("");
+                    txtExpirationDate.setText("");
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.failed, Toast.LENGTH_SHORT).show();
+                }
             } else if (sProductName.equals("") && !sAmount.equals("")) {
-                Toast.makeText(getApplicationContext(), "Uzupełnij nazwe.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.complete_the_name, Toast.LENGTH_SHORT).show();
             } else if (!sProductName.equals("") && sAmount.equals("")) {
-                Toast.makeText(getApplicationContext(), "Uzupełnij ilość.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.complete_the_amount, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "Uzupełnij puste pola.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.fill_in_the_blanks, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -168,7 +178,7 @@ public class AddingActivity extends AppCompatActivity implements DatePickerDialo
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), "Nie znaleziono", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.not_found, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 etxtProductName.setText(response.body());
