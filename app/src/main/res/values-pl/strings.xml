@@ -38,4 +38,10 @@
     <string name="delete_q">Usunąć</string>
     <string name="want_to_delete">Czy na pewno chcesz to usunąć?</string>
     <string name="added">Dodano!</string>
+
+    <string-array name="products_types">
+        <item name="groceries">Artykuły spożywcze</item>
+        <item name="diapers">Artykuły higieniczne</item>
+        <item name="industrial_goods">Artykuły przemysłowe</item>
+    </string-array>
 </resources>

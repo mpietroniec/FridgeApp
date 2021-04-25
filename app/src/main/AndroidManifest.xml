@@ -14,10 +14,7 @@
         android:theme="@style/Theme.FridgeApp">
         <activity
             android:name=".InfoActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".fridgeImage.FridgeImageActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".reviewProducts.ReviewActivity" />
         <activity
             android:name=".helpers.Capture"
             android:screenOrientation="portrait"
@@ -31,16 +28,17 @@
             android:parentActivityName=".reviewProducts.ReviewActivity" />
         <activity
             android:name=".reviewProducts.ReviewActivity"
-            android:parentActivityName=".MainActivity" />
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.FridgeApp.NoActionBar"/>
         <activity
             android:name=".shoppingList.AddToShoppingList"
             android:parentActivityName=".shoppingList.ShoppingList" />
         <activity
             android:name=".shoppingList.ShoppingList"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".reviewProducts.ReviewActivity" />
         <activity
             android:name=".reviewProducts.AddingActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".reviewProducts.ReviewActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,7 +46,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

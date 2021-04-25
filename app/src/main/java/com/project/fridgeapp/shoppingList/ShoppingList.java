@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -25,6 +27,7 @@ public class ShoppingList extends AppCompatActivity implements ItemClickListener
 
     private FloatingActionButton btnAddToShoppingList;
     private RecyclerView recyclerView;
+    private LinearLayout llEmptyShoppingList;
 
     List<ShoppingListItem> dataList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
@@ -100,7 +103,14 @@ public class ShoppingList extends AppCompatActivity implements ItemClickListener
 
     void initRecyclerView(List<ShoppingListItem> dataList) {
         recyclerView = findViewById(R.id.rv_shopping_list);
-
+        llEmptyShoppingList = findViewById(R.id.ll_empty_shopping_list);
+        if (dataList.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            llEmptyShoppingList.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            llEmptyShoppingList.setVisibility(View.GONE);
+        }
         linearLayoutManager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(linearLayoutManager);
