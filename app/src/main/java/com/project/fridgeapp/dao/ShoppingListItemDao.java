@@ -9,8 +9,6 @@ import com.project.fridgeapp.entities.ShoppingListItem;
 
 import java.util.List;
 
-import static androidx.room.OnConflictStrategy.REPLACE;
-
 @Dao
 public interface ShoppingListItemDao {
 

@@ -85,6 +85,14 @@ public class ShoppingList extends AppCompatActivity implements ItemClickListener
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        database = DatabaseHelper.getInstance(this);
+        dataList = database.shoppingListItemDao().getAllShoppingListByShopName();
+        initRecyclerView(dataList);
+    }
+
     void confirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.delete_all_q);
@@ -96,7 +104,6 @@ public class ShoppingList extends AppCompatActivity implements ItemClickListener
             startActivity(intent);
         });
         builder.setNegativeButton(R.string.no, (dialog, which) -> {
-
         });
         builder.show();
     }
