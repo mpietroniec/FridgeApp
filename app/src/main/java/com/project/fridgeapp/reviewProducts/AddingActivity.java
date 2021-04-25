@@ -1,7 +1,6 @@
 package com.project.fridgeapp.reviewProducts;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,27 +14,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.project.fridgeapp.R;
 import com.project.fridgeapp.database.DatabaseHelper;
 import com.project.fridgeapp.entities.FridgeProduct;
 import com.project.fridgeapp.helpers.DateParser;
 import com.project.fridgeapp.helpers.DatePickerFragment;
-import com.project.fridgeapp.helpers.JsonPlaceHolderApi;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -48,8 +40,6 @@ public class AddingActivity extends AppCompatActivity implements DatePickerDialo
     private Button btnAddProduct;
     private DatabaseHelper databaseHelper;
     private List<FridgeProduct> fridgeProductsList = new ArrayList<>();
-    private JsonPlaceHolderApi jsonPlaceHolderApi;
-    private String barcodeScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,22 +56,7 @@ public class AddingActivity extends AppCompatActivity implements DatePickerDialo
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
         etxtProductName = findViewById(R.id.etxt_add_name);
-
-//        txtScanBarcode = findViewById(R.id.txt_scan_barcode);
-//        txtScanBarcode.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                IntentIntegrator intentIntegrator = new IntentIntegrator(AddingActivity.this);
-//                intentIntegrator.setBeepEnabled(true);
-//                intentIntegrator.setOrientationLocked(true);
-//                intentIntegrator.setCaptureActivity(Capture.class);
-//                intentIntegrator.initiateScan();
-//                getProductName("737628064502");
-//            }
-//        });
 
         etxtProductAmount = findViewById(R.id.etxt_add_amount);
 
@@ -171,36 +146,5 @@ public class AddingActivity extends AppCompatActivity implements DatePickerDialo
         String dateString = dateFormat.format(calendar.getTime());
 
         textView.setText(dateString);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        IntentResult intentResult = IntentIntegrator.parseActivityResult(
-                requestCode, resultCode, data
-        );
-        if (intentResult.getContents() != null) {
-            barcodeScan = intentResult.getContents();
-            getProductName("737628064502");
-        }
-    }
-
-    private void getProductName(String barcode) {
-        Call<String> call = jsonPlaceHolderApi.getNameFromApi(barcode);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (!response.isSuccessful()) {
-                    Toast.makeText(getApplicationContext(), R.string.not_found, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                etxtProductName.setText(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

@@ -32,7 +32,7 @@
     <string name="fill_in_the_blanks">Uzupełnij puste pola</string>
     <string name="not_found">Nie znaleziono</string>
     <string name="delete_all_q">Usunąć wszystko?</string>
-    <string name="delete_everything">Czy na pewno usunąć wsszystko?</string>
+    <string name="delete_everything">Czy na pewno usunąć wszystko?</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
     <string name="delete_q">Usunąć</string>
@@ -41,7 +41,11 @@
 
     <string-array name="products_types">
         <item name="groceries">Artykuły spożywcze</item>
-        <item name="diapers">Artykuły higieniczne</item>
-        <item name="industrial_goods">Artykuły przemysłowe</item>
+        <item name="diapers">Artykułu higieniczne</item>
+        <item name="industrial_goods">Artykuły gospodarcze</item>
     </string-array>
+
+    <string name="groceries">Żywność</string>
+    <string name="diapers">Higiena</string>
+    <string name="industrial_goods">Gospodarcze</string>
 </resources>

@@ -40,6 +40,9 @@
     <string name="failed">Failed</string>
     <string name="open_navigation_drawer">Open navigation drawer</string>
     <string name="close_navigation_drawer">Close navigation drawer</string>
+    <string name="groceries">Groceries</string>
+    <string name="diapers">Diapers</string>
+    <string name="industrial_goods">Industrial goods</string>
 
     <string-array name="products_types">
         <item name="groceries">Groceries</item>

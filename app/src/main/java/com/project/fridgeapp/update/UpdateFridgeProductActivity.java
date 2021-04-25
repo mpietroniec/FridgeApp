@@ -22,7 +22,6 @@ import androidx.fragment.app.DialogFragment;
 import com.project.fridgeapp.R;
 import com.project.fridgeapp.database.DatabaseHelper;
 import com.project.fridgeapp.entities.FridgeProduct;
-import com.project.fridgeapp.entities.ShoppingListItem;
 import com.project.fridgeapp.helpers.DateParser;
 import com.project.fridgeapp.helpers.DatePickerFragment;
 import com.project.fridgeapp.reviewProducts.ReviewActivity;
@@ -36,7 +35,7 @@ import java.util.List;
 public class UpdateFridgeProductActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private EditText etxtUpdateName, etxtUpdateAmount;
     private Spinner spinUpdateType;
-    private TextView txtUpdateDate, txtUpdateScanBarcode;
+    private TextView txtUpdateDate;
     private ImageView ivDeleteDate;
     private Button btnUpdate;
     private DatabaseHelper database;
@@ -62,18 +61,6 @@ public class UpdateFridgeProductActivity extends AppCompatActivity implements Da
 
         etxtUpdateName = findViewById(R.id.etxt_update_name);
         etxtUpdateName.setText(sProductName);
-
-//        txtUpdateScanBarcode = findViewById(R.id.txt_update_scan_barcode);
-//        txtUpdateScanBarcode.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                IntentIntegrator intentIntegrator = new IntentIntegrator(UpdateFridgeProductActivity.this);
-//                intentIntegrator.setBeepEnabled(true);
-//                intentIntegrator.setOrientationLocked(true);
-//                intentIntegrator.setCaptureActivity(Capture.class);
-//                intentIntegrator.initiateScan();
-//            }
-//        });
 
         etxtUpdateAmount = findViewById(R.id.etxt_update_amount);
         etxtUpdateAmount.setText(String.valueOf(sAmount));

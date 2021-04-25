@@ -138,8 +138,8 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    protected void onResume() {
+        super.onResume();
         database = DatabaseHelper.getInstance(this);
         dataList = database.fridgeProductDao().getAllFridgeProducts();
         initRecyclerView(dataList);
@@ -176,13 +176,6 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
                         break;
 
                 }
-//                bottomNavigationView.setOnClickListener(view -> {
-//                    if (bottomNavigationView.getMenu().getItem(0).isChecked()) {
-//                        dataList = database.fridgeProductDao().getAllFridgeProducts();
-//                        bottomNavigationView.getMenu().getItem(0).setChecked(false);
-//                        initRecyclerView(dataList);
-//                    }
-//                });
                 return false;
             };
 }

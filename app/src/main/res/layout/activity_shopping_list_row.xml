@@ -89,11 +89,10 @@
                     android:id="@+id/ll_shop_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="gone">
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:text="@string/shop_name"
                         android:textColor="@color/design_default_color_primary"

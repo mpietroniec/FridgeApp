@@ -3,13 +3,13 @@
     <item
         android:id="@+id/id_menu_groceries"
         android:icon="@drawable/ic_fastfood"
-        android:title="Groceries" />
+        android:title="@string/groceries" />
     <item
         android:id="@+id/id_menu_diapers"
         android:icon="@drawable/ic_clean_hands"
-        android:title="Diapers" />
+        android:title="@string/diapers" />
     <item
         android:id="@+id/id_menu_industrial_goods"
         android:icon="@drawable/ic_cleaning_services"
-        android:title="Industrial goods" />
+        android:title="@string/industrial_goods" />
 </menu>
