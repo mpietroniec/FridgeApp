@@ -21,6 +21,8 @@ public class FridgeProduct implements Parcelable {
     private String fridgeProductName;
     @ColumnInfo(name = "table_fridge_product_amount")
     private int fridgeProductAmount;
+    @ColumnInfo(name = "table_fridge_product_type")
+    private long fridgeProductType;
     @ColumnInfo(name = "table_fridge_product_expiration_date")
     @TypeConverters({DateTypeConverter.class})
     private Date fridgeProductExpirationDate;
@@ -32,6 +34,7 @@ public class FridgeProduct implements Parcelable {
         fridgeID = in.readLong();
         fridgeProductName = in.readString();
         fridgeProductAmount = in.readInt();
+        fridgeProductType = in.readLong();
         fridgeProductExpirationDate = new Date(in.readLong());
     }
 
@@ -71,6 +74,14 @@ public class FridgeProduct implements Parcelable {
         this.fridgeProductAmount = fridgeProductAmount;
     }
 
+    public long getFridgeProductType() {
+        return fridgeProductType;
+    }
+
+    public void setFridgeProductType(long fridgeProductType) {
+        this.fridgeProductType = fridgeProductType;
+    }
+
     public Date getFridgeProductExpirationDate() {
         return fridgeProductExpirationDate;
     }
@@ -89,6 +100,7 @@ public class FridgeProduct implements Parcelable {
         parcel.writeLong(fridgeID);
         parcel.writeString(fridgeProductName);
         parcel.writeInt(fridgeProductAmount);
+        parcel.writeLong(fridgeProductType);
         if (fridgeProductExpirationDate != null) {
             parcel.writeLong(fridgeProductExpirationDate.getTime());
         }

@@ -38,4 +38,12 @@
     <string name="want_to_delete">Are you sure you want to delete?</string>
     <string name="added">Added!</string>
     <string name="failed">Failed</string>
+    <string name="open_navigation_drawer">Open navigation drawer</string>
+    <string name="close_navigation_drawer">Close navigation drawer</string>
+
+    <string-array name="products_types">
+        <item name="groceries">Groceries</item>
+        <item name="diapers">Diapers</item>
+        <item name="industrial_goods">Domestic industrial goods</item>
+    </string-array>
 </resources>

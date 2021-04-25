@@ -8,9 +8,13 @@
         android:title="@string/delete_all"
         app:showAsAction="always" />
     <group>
+
         <item
             android:id="@+id/sort_by_expiration_date"
             android:title="@string/sort_by_expiration_date" />
+        <item
+            android:id="@+id/show_everything"
+            android:title="Show everything" />
     </group>
 
 </menu>

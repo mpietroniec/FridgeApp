@@ -8,6 +8,7 @@ import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -58,6 +59,13 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
         database = DatabaseHelper.getInstance(context);
         holder.txtName.setText(fridgeProduct.getFridgeProductName());
         holder.txtAmount.setText(String.valueOf(fridgeProduct.getFridgeProductAmount()));
+        if (fridgeProduct.getFridgeProductType()==0) {
+            holder.ivType.setImageResource(R.drawable.ic_fastfood);
+        } else if (fridgeProduct.getFridgeProductType()==1) {
+            holder.ivType.setImageResource(R.drawable.ic_clean_hands);
+        } else {
+            holder.ivType.setImageResource(R.drawable.ic_cleaning_services);
+        }
         if (fridgeProduct.getFridgeProductExpirationDate() != null) {
             holder.txtExpirationDate.setText(DateParser.dateToStringParser(fridgeProduct.getFridgeProductExpirationDate()));
             TransitionManager.beginDelayedTransition(holder.cardViewReview, new AutoTransition());
@@ -104,6 +112,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
 
     public class FridgeProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView txtName, txtAmount, txtBtnEditFridgeProduct, txtBtnDeleteFridgeProduct, txtExpirationDate;
+        private ImageView ivType;
         LinearLayout expandableLinearLayout, expirationDateLinearLayout;
         CardView cardViewReview;
         ItemClickListener itemClickListener;
@@ -112,6 +121,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
             super(itemView);
             txtName = itemView.findViewById(R.id.txt_product_name);
             txtAmount = itemView.findViewById(R.id.txt_product_amount);
+            ivType = itemView.findViewById(R.id.iv_type);
             txtExpirationDate = itemView.findViewById(R.id.txt_fridge_product_expiration_date);
 
             txtBtnEditFridgeProduct = itemView.findViewById(R.id.txt_btn_fridge_product_edit);

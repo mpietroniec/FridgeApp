@@ -7,37 +7,41 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import com.google.zxing.integration.android.IntentIntegrator;
 import com.project.fridgeapp.R;
 import com.project.fridgeapp.database.DatabaseHelper;
 import com.project.fridgeapp.entities.FridgeProduct;
 import com.project.fridgeapp.entities.ShoppingListItem;
-import com.project.fridgeapp.helpers.Capture;
 import com.project.fridgeapp.helpers.DateParser;
 import com.project.fridgeapp.helpers.DatePickerFragment;
+import com.project.fridgeapp.reviewProducts.ReviewActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class UpdateFridgeProductActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private EditText etxtUpdateName, etxtUpdateAmount;
+    private Spinner spinUpdateType;
     private TextView txtUpdateDate, txtUpdateScanBarcode;
     private ImageView ivDeleteDate;
     private Button btnUpdate;
     private DatabaseHelper database;
     private Context context;
-    private List<ShoppingListItem> shoppingListItemsList;
+    private List<FridgeProduct> fridgeProductsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,29 +52,38 @@ public class UpdateFridgeProductActivity extends AppCompatActivity implements Da
         FridgeProduct fridgeProduct = intent.getParcelableExtra("Fridge Product");
 
         database = DatabaseHelper.getInstance(context);
+        fridgeProductsList = database.fridgeProductDao().getAllFridgeProducts();
 
         long sFridgeID = fridgeProduct.getFridgeID();
         String sProductName = fridgeProduct.getFridgeProductName();
         int sAmount = fridgeProduct.getFridgeProductAmount();
+        long sProductType = fridgeProduct.getFridgeProductType();
         Date sExpirationDate = fridgeProduct.getFridgeProductExpirationDate();
 
         etxtUpdateName = findViewById(R.id.etxt_update_name);
         etxtUpdateName.setText(sProductName);
 
-        txtUpdateScanBarcode = findViewById(R.id.txt_update_scan_barcode);
-        txtUpdateScanBarcode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                IntentIntegrator intentIntegrator = new IntentIntegrator(UpdateFridgeProductActivity.this);
-                intentIntegrator.setBeepEnabled(true);
-                intentIntegrator.setOrientationLocked(true);
-                intentIntegrator.setCaptureActivity(Capture.class);
-                intentIntegrator.initiateScan();
-            }
-        });
+//        txtUpdateScanBarcode = findViewById(R.id.txt_update_scan_barcode);
+//        txtUpdateScanBarcode.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                IntentIntegrator intentIntegrator = new IntentIntegrator(UpdateFridgeProductActivity.this);
+//                intentIntegrator.setBeepEnabled(true);
+//                intentIntegrator.setOrientationLocked(true);
+//                intentIntegrator.setCaptureActivity(Capture.class);
+//                intentIntegrator.initiateScan();
+//            }
+//        });
 
         etxtUpdateAmount = findViewById(R.id.etxt_update_amount);
         etxtUpdateAmount.setText(String.valueOf(sAmount));
+
+        spinUpdateType = findViewById(R.id.spin_update_product_type);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.products_types, R.layout.spinner_product_type_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinUpdateType.setAdapter(adapter);
+        int position = (int) fridgeProduct.getFridgeProductType();
+        spinUpdateType.setSelection(position);
 
         ivDeleteDate = findViewById(R.id.iv_delete_date_in_update_activity);
 
@@ -111,8 +124,16 @@ public class UpdateFridgeProductActivity extends AppCompatActivity implements Da
         btnUpdate.setOnClickListener(view -> {
             String sProductName1 = etxtUpdateName.getText().toString().trim();
             int sAmount1 = Integer.parseInt(etxtUpdateAmount.getText().toString().trim());
+            String sProductType1 = spinUpdateType.getSelectedItem().toString();
             Date sExpirationDate1 = DateParser.stringToDateParser(txtUpdateDate.getText().toString().trim());
-            database.fridgeProductDao().update(sFridgeID, sProductName1, sAmount1, sExpirationDate1);
+            long result = database.fridgeProductDao().update(sFridgeID, sProductName1, sAmount1, sProductType1, sExpirationDate1);
+            if (result != -1) {
+                Toast.makeText(getApplicationContext(), "Updated!", Toast.LENGTH_SHORT).show();
+                fridgeProductsList.clear();
+                fridgeProductsList.addAll(database.fridgeProductDao().getAllFridgeProducts());
+                Intent intent1 = new Intent(UpdateFridgeProductActivity.this, ReviewActivity.class);
+                startActivityForResult(intent1, 1);
+            }
         });
     }
 

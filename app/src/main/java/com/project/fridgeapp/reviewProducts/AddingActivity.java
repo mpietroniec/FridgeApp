@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +44,7 @@ public class AddingActivity extends AppCompatActivity implements DatePickerDialo
     private EditText etxtProductName, etxtProductAmount;
     private TextView txtExpirationDate, txtScanBarcode;
     private ImageView ivDeleteDate;
+    private Spinner spinProductType;
     private Button btnAddProduct;
     private DatabaseHelper databaseHelper;
     private List<FridgeProduct> fridgeProductsList = new ArrayList<>();
@@ -67,20 +70,26 @@ public class AddingActivity extends AppCompatActivity implements DatePickerDialo
 
         etxtProductName = findViewById(R.id.etxt_add_name);
 
-        txtScanBarcode = findViewById(R.id.txt_scan_barcode);
-        txtScanBarcode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        txtScanBarcode = findViewById(R.id.txt_scan_barcode);
+//        txtScanBarcode.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
 //                IntentIntegrator intentIntegrator = new IntentIntegrator(AddingActivity.this);
 //                intentIntegrator.setBeepEnabled(true);
 //                intentIntegrator.setOrientationLocked(true);
 //                intentIntegrator.setCaptureActivity(Capture.class);
 //                intentIntegrator.initiateScan();
-                getProductName("737628064502");
-            }
-        });
+//                getProductName("737628064502");
+//            }
+//        });
 
         etxtProductAmount = findViewById(R.id.etxt_add_amount);
+
+        spinProductType = findViewById(R.id.spin_product_type);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.products_types, R.layout.spinner_product_type_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinProductType.setAdapter(adapter);
 
         ivDeleteDate = findViewById(R.id.iv_delete_date_in_add_activity);
 
@@ -115,6 +124,7 @@ public class AddingActivity extends AppCompatActivity implements DatePickerDialo
         btnAddProduct.setOnClickListener(view -> {
             String sProductName = etxtProductName.getText().toString().trim();
             String sAmount = etxtProductAmount.getText().toString().trim();
+            long sProductType = spinProductType.getSelectedItemId();
             String sExpirationDate = txtExpirationDate.getText().toString().trim();
 
             if (!sProductName.equals("") && !sAmount.equals("")) {
@@ -122,6 +132,7 @@ public class AddingActivity extends AppCompatActivity implements DatePickerDialo
                 int dbAmount = Integer.parseInt(sAmount);
                 fridgeProduct.setFridgeProductName(sProductName);
                 fridgeProduct.setFridgeProductAmount(dbAmount);
+                fridgeProduct.setFridgeProductType(sProductType);
                 fridgeProduct.setFridgeProductExpirationDate(DateParser.stringToDateParser(sExpirationDate));
                 long result = databaseHelper.fridgeProductDao().insert(fridgeProduct);
                 if (result != -1) {
@@ -132,7 +143,9 @@ public class AddingActivity extends AppCompatActivity implements DatePickerDialo
 
                     etxtProductName.setText("");
                     etxtProductAmount.setText("");
+                    spinProductType.setSelection(0);
                     txtExpirationDate.setText("");
+
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.failed, Toast.LENGTH_SHORT).show();
                 }
