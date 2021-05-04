@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/id_menu_groceries"
+        android:id="@+id/menu_groceries"
         android:icon="@drawable/ic_fastfood"
         android:title="@string/groceries" />
     <item
-        android:id="@+id/id_menu_diapers"
+        android:id="@+id/menu_diapers"
         android:icon="@drawable/ic_clean_hands"
         android:title="@string/diapers" />
     <item
-        android:id="@+id/id_menu_industrial_goods"
+        android:id="@+id/menu_industrial_goods"
         android:icon="@drawable/ic_cleaning_services"
         android:title="@string/industrial_goods" />
 </menu>

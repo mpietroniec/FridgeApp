@@ -30,7 +30,7 @@ import com.project.fridgeapp.shoppingList.ShoppingList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewActivity extends AppCompatActivity implements ItemClickListener {
+public class ReviewActivity extends AppCompatActivity implements ItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private FloatingActionButton btnAddProduct, btnGoToShoppingList;
@@ -38,6 +38,7 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
     private LinearLayout llEmptyView;
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
+    private int mMenuId;
 
     List<FridgeProduct> dataList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
@@ -73,8 +74,10 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
         toggle.syncState();
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
-        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.getMenu().getItem(0).setCheckable(false);
+        bottomNavigationView.getMenu().getItem(1).setCheckable(false);
+        bottomNavigationView.getMenu().getItem(2).setCheckable(false);
     }
 
     @Override
@@ -131,7 +134,6 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
             llEmptyView.setVisibility(View.GONE);
         }
         linearLayoutManager = new LinearLayoutManager(this);
-
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new ReviewAdapter(dataList, ReviewActivity.this, this);
         recyclerView.setAdapter(adapter);
@@ -151,31 +153,48 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
         drawerLayout.closeDrawers();
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            item -> {
-                database = DatabaseHelper.getInstance(this);
-                switch (item.getItemId()) {
-                    case R.id.id_menu_groceries:
-                        dataList = database.fridgeProductDao().getAllGroceries();
-                        bottomNavigationView.getMenu().setGroupCheckable(0, true, true);
-                        //bottomNavigationView.getMenu().getItem(0).setChecked(true);
-                        initRecyclerView(dataList);
-                        break;
-                    case R.id.id_menu_diapers:
-                        dataList = database.fridgeProductDao().getAllDiapers();
-                        bottomNavigationView.getMenu().setGroupCheckable(0, true, true);
-                        // bottomNavigationView.getMenu().getItem(1).setChecked(true);
-                        initRecyclerView(dataList);
-                        break;
-                    case R.id.id_menu_industrial_goods:
-                        dataList = database.fridgeProductDao().getAllIndustrialGoods();
-                        bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
-                        bottomNavigationView.getMenu().setGroupCheckable(2, true, true);
-                        // bottomNavigationView.getMenu().getItem(2).setChecked(true);
-                        initRecyclerView(dataList);
-                        break;
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        database = DatabaseHelper.getInstance(this);
 
+        mMenuId = item.getItemId();
+        for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
+            MenuItem menuItem = bottomNavigationView.getMenu().getItem(i);
+            boolean isChecked = menuItem.getItemId() == item.getItemId();
+            menuItem.setChecked(!isChecked);
+        }
+        switch (item.getItemId()) {
+            case R.id.menu_groceries:
+                if(item.isCheckable()){
+                    item.setCheckable(false);
+                    dataList = database.fridgeProductDao().getAllFridgeProducts();
+                } else {
+                    item.setCheckable(true);
+                    dataList = database.fridgeProductDao().getAllGroceries();
                 }
-                return false;
-            };
+                initRecyclerView(dataList);
+                break;
+            case R.id.menu_diapers:
+                if (item.isCheckable()) {
+                    item.setCheckable(false);
+                    dataList = database.fridgeProductDao().getAllFridgeProducts();
+                } else {
+                    item.setCheckable(true);
+                    dataList = database.fridgeProductDao().getAllDiapers();
+                }
+                initRecyclerView(dataList);
+                break;
+            case R.id.menu_industrial_goods:
+                if(item.isCheckable()){
+                    item.setCheckable(false);
+                    dataList = database.fridgeProductDao().getAllFridgeProducts();
+                } else {
+                    item.setCheckable(true);
+                    dataList = database.fridgeProductDao().getAllIndustrialGoods();
+                }
+                initRecyclerView(dataList);
+                break;
+        }
+        return true;
+    }
 }
