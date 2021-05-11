@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ public class ShoppingList extends AppCompatActivity implements ItemClickListener
     private FloatingActionButton btnAddToShoppingList;
     private RecyclerView recyclerView;
     private LinearLayout llEmptyShoppingList;
+    private CheckBox chboxRemoveMarked;
 
     List<ShoppingListItem> dataList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
@@ -82,6 +84,18 @@ public class ShoppingList extends AppCompatActivity implements ItemClickListener
             initRecyclerView(dataList);
 
         }
+
+//        else if (item.getItemId() == R.id.remove_marked) {
+//            database = DatabaseHelper.getInstance(this);
+//            chboxRemoveMarked = findViewById(R.id.chbox_shopping_list);
+//            chboxRemoveMarked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                @Override
+//                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                    ShoppingListItem item1 = dataList.t;
+//                    database.shoppingListItemDao().delete(item1);
+//                }
+//            });
+//        }
         return super.onOptionsItemSelected(item);
     }
 

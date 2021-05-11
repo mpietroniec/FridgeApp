@@ -64,8 +64,13 @@ public class UpdateShoppingListItemActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                ivUpdateDeleteShopName.setVisibility(View.VISIBLE);
             }
+        });
+
+        ivUpdateDeleteShopName.setOnClickListener(view -> {
+            etxtUpdateShoppingListItemShopName.setText("");
+            ivUpdateDeleteShopName.setVisibility(View.GONE);
         });
 
         btnUpdate = findViewById(R.id.btn_update_shopping_list);
