@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.project.fridgeapp.ItemClickListener;
 import com.project.fridgeapp.R;
 import com.project.fridgeapp.helpers.DateParser;
@@ -57,6 +58,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
         FridgeProduct fridgeProduct = fridgeProductsList.get(position);
         //Initialize database
         database = DatabaseHelper.getInstance(context);
+
         holder.txtName.setText(fridgeProduct.getFridgeProductName());
         holder.txtAmount.setText(String.valueOf(fridgeProduct.getFridgeProductAmount()));
         if (fridgeProduct.getFridgeProductType()==0) {
@@ -112,7 +114,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
 
     public class FridgeProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView txtName, txtAmount, txtBtnEditFridgeProduct, txtBtnDeleteFridgeProduct, txtExpirationDate;
-        private ImageView ivType;
+        private ImageView ivType, ivCart;
         LinearLayout expandableLinearLayout, expirationDateLinearLayout;
         CardView cardViewReview;
         ItemClickListener itemClickListener;
@@ -123,7 +125,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.FridgeProd
             txtAmount = itemView.findViewById(R.id.txt_product_amount);
             ivType = itemView.findViewById(R.id.iv_type);
             txtExpirationDate = itemView.findViewById(R.id.txt_fridge_product_expiration_date);
-
             txtBtnEditFridgeProduct = itemView.findViewById(R.id.txt_btn_fridge_product_edit);
             txtBtnDeleteFridgeProduct = itemView.findViewById(R.id.txt_btn_fridge_product_delete);
             expandableLinearLayout = itemView.findViewById(R.id.ll_fridge_product_edit);

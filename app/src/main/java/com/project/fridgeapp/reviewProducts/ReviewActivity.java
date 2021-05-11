@@ -1,12 +1,14 @@
 package com.project.fridgeapp.reviewProducts;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -25,12 +27,14 @@ import com.project.fridgeapp.ItemClickListener;
 import com.project.fridgeapp.R;
 import com.project.fridgeapp.database.DatabaseHelper;
 import com.project.fridgeapp.entities.FridgeProduct;
+import com.project.fridgeapp.helpers.MyButtonClickListener;
+import com.project.fridgeapp.helpers.SwipeHelper;
 import com.project.fridgeapp.shoppingList.ShoppingList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewActivity extends AppCompatActivity implements ItemClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class ReviewActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private FloatingActionButton btnAddProduct, btnGoToShoppingList;
@@ -44,6 +48,7 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
     LinearLayoutManager linearLayoutManager;
     DatabaseHelper database;
     ReviewAdapter adapter;
+    private ItemClickListener itemClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +83,6 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
         bottomNavigationView.getMenu().getItem(0).setCheckable(false);
         bottomNavigationView.getMenu().getItem(1).setCheckable(false);
         bottomNavigationView.getMenu().getItem(2).setCheckable(false);
-    }
-
-    @Override
-    public void onItemClickListener(int position) {
-
     }
 
     @Override
@@ -135,8 +135,27 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
         }
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new ReviewAdapter(dataList, ReviewActivity.this, this);
+
+
+        adapter = new ReviewAdapter(dataList, ReviewActivity.this, itemClickListener);
         recyclerView.setAdapter(adapter);
+
+        SwipeHelper swipeHelper = new SwipeHelper(this, recyclerView, 200) {
+            @Override
+            public void instantiateMyButton(RecyclerView.ViewHolder viewHolder, List<SwipeHelper.MyButton> buffer) {
+                buffer.add(new MyButton(ReviewActivity.this,
+                        "Delete",
+                        30,
+                        R.drawable.ic_shopping_cart,
+                        Color.parseColor("#FFFFFF"),
+                        new MyButtonClickListener(){
+                            @Override
+                            public void onClick(int position) {
+                                Toast.makeText(ReviewActivity.this,"delete", Toast.LENGTH_SHORT).show();
+                            }
+                        }));
+            }
+        };
     }
 
     @Override
@@ -145,6 +164,9 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
         database = DatabaseHelper.getInstance(this);
         dataList = database.fridgeProductDao().getAllFridgeProducts();
         initRecyclerView(dataList);
+        bottomNavigationView.getMenu().getItem(0).setCheckable(false);
+        bottomNavigationView.getMenu().getItem(1).setCheckable(false);
+        bottomNavigationView.getMenu().getItem(2).setCheckable(false);
     }
 
     public void startInfoActivity(MenuItem item) {
@@ -165,7 +187,7 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
         }
         switch (item.getItemId()) {
             case R.id.menu_groceries:
-                if(item.isCheckable()){
+                if (item.isCheckable()) {
                     item.setCheckable(false);
                     dataList = database.fridgeProductDao().getAllFridgeProducts();
                 } else {
@@ -185,7 +207,7 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
                 initRecyclerView(dataList);
                 break;
             case R.id.menu_industrial_goods:
-                if(item.isCheckable()){
+                if (item.isCheckable()) {
                     item.setCheckable(false);
                     dataList = database.fridgeProductDao().getAllFridgeProducts();
                 } else {
@@ -197,4 +219,5 @@ public class ReviewActivity extends AppCompatActivity implements ItemClickListen
         }
         return true;
     }
+
 }

@@ -56,7 +56,6 @@ public class UpdateFridgeProductActivity extends AppCompatActivity implements Da
         long sFridgeID = fridgeProduct.getFridgeID();
         String sProductName = fridgeProduct.getFridgeProductName();
         int sAmount = fridgeProduct.getFridgeProductAmount();
-        long sProductType = fridgeProduct.getFridgeProductType();
         Date sExpirationDate = fridgeProduct.getFridgeProductExpirationDate();
 
         etxtUpdateName = findViewById(R.id.etxt_update_name);
@@ -75,7 +74,8 @@ public class UpdateFridgeProductActivity extends AppCompatActivity implements Da
         ivDeleteDate = findViewById(R.id.iv_delete_date_in_update_activity);
 
         txtUpdateDate = findViewById(R.id.txt_update_expiration_date);
-        if (!sExpirationDate.toString().equals("Thu Jan 01 00:00:00 GMT 1970")) {
+        if (!sExpirationDate.toString().equals("Thu Jan 01 00:00:00 GMT 1970") &&
+                !sExpirationDate.toString().equals("Thu Jan 01 01:00:00 GMT+01:00 1970")) {
             txtUpdateDate.setText(dateFormat(sExpirationDate));
             ivDeleteDate.setVisibility(View.VISIBLE);
         }
